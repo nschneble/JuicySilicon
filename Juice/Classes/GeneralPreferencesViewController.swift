@@ -33,7 +33,7 @@ class GeneralPreferencesViewController: NSViewController {
     @IBOutlet weak var launchOnLoginButton: NSButton!
     
     override var nibName: NSNib.Name? {
-        return NSNib.Name(rawValue: "GeneralPreferencesViewController")
+        return "GeneralPreferencesViewController"
     }
     
     override func viewDidLoad() {
