@@ -19,11 +19,15 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="267" height="279"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pX0-YP-H9w">
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pX0-YP-H9w">
                     <rect key="frame" x="69" y="24" width="135" height="224"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="135" id="abt-sw-001"/>
+                        <constraint firstAttribute="height" constant="224" id="abt-sh-001"/>
+                    </constraints>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OvV-0K-JDp">
                             <rect key="frame" x="3.5" y="96" width="128" height="128"/>
@@ -73,6 +77,10 @@
                     </customSpacing>
                 </stackView>
             </subviews>
+            <constraints>
+                <constraint firstItem="pX0-YP-H9w" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="abt-cx-001"/>
+                <constraint firstItem="pX0-YP-H9w" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="abt-cy-001"/>
+            </constraints>
             <point key="canvasLocation" x="48.5" y="70.5"/>
         </customView>
     </objects>

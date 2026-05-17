@@ -36,18 +36,20 @@ final class PreferencesWindowController: NSWindowController, NSToolbarDelegate {
                 super.contentViewController = newValue
                 return
             }
-            
-            let preferredOrigin = window.frame.origin
+
+            let priorFrame = window.frame
             let heightDelta = newView.frame.height - contentView.frame.height
-            
-            value.preferredScreenOrigin = window.frame.origin
+
+            value.preferredScreenOrigin = priorFrame.origin
             super.contentViewController = value
-            
-            var windowFrame = window.frame
-            windowFrame.size = NSSize(width: windowFrame.size.width, height: windowFrame.size.height + heightDelta)
-            windowFrame.origin = NSPoint(x: preferredOrigin.x, y: preferredOrigin.y - heightDelta)
-    
-            window.setFrameOrigin(windowFrame.origin)
+
+            let newFrame = NSRect(
+                x: priorFrame.origin.x,
+                y: priorFrame.origin.y - heightDelta,
+                width: priorFrame.size.width,
+                height: priorFrame.size.height + heightDelta
+            )
+            window.setFrame(newFrame, display: true)
         }
     }
     
@@ -85,9 +87,10 @@ final class PreferencesWindowController: NSWindowController, NSToolbarDelegate {
     //MARK: - NSToolbarDelegate
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        return [Identifiers.General,
-                NSToolbarItem.Identifier.flexibleSpace,
-                Identifiers.Tip]
+        return [NSToolbarItem.Identifier.flexibleSpace,
+                Identifiers.General,
+                Identifiers.Tip,
+                NSToolbarItem.Identifier.flexibleSpace]
     }
     
     func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {

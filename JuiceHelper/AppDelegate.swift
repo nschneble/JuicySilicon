@@ -18,10 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
-        NSWorkspace.shared.launchApplication(withBundleIdentifier: "com.bsm.macos.Juice",
-                                               options: NSWorkspace.LaunchOptions.async,
-                                               additionalEventParamDescriptor: nil,
-                                               launchIdentifier: nil)
+        if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.bsm.macos.Juice") {
+            NSWorkspace.shared.openApplication(at: url, configuration: NSWorkspace.OpenConfiguration())
+        }
     }
 }
 

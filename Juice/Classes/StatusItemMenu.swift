@@ -8,7 +8,7 @@
 
 import AppKit
 
-protocol StatusMenuItemDelegate: class {
+protocol StatusMenuItemDelegate: AnyObject {
     func status(didClickPreferences menuItem: StatusMenuItem)
 }
 
