@@ -129,7 +129,7 @@ extension FileBackedChargeScaleDisplay {
                                             fileName: "dotted-line")
     }
 
-    static func makeKittiesScale(id: String) -> FileBackedChargeScaleDisplay {
+    static func makeKittiesScale() -> FileBackedChargeScaleDisplay {
         let detents = [0: "🙀",
                        1: "🙀",
                        2: "😿",

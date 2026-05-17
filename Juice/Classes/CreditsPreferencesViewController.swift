@@ -11,7 +11,7 @@ import Cocoa
 class CreditsPreferencesViewController: NSViewController {
 
     override var nibName: NSNib.Name? {
-        return NSNib.Name(rawValue: "CreditsPreferencesViewController")
+        return "CreditsPreferencesViewController"
     }
 
 }

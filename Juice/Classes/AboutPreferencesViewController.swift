@@ -13,7 +13,7 @@ class AboutPreferencesViewController: NSViewController {
     @IBOutlet weak var buildLabel: NSTextField!
     
     override var nibName: NSNib.Name? {
-        return NSNib.Name(rawValue: "AboutPreferencesViewController")
+        return "AboutPreferencesViewController"
     }
     
     override func viewDidLoad() {
@@ -28,5 +28,13 @@ class AboutPreferencesViewController: NSViewController {
         
         versionLabel.stringValue = "Version \(version)"
         buildLabel.stringValue = "Build \(build)"
+
+        if let stackView = view.subviews.first as? NSStackView {
+            let label = NSTextField(labelWithString: "Works on Apple Silicon")
+            label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+            label.textColor = .secondaryLabelColor
+            label.alignment = .center
+            stackView.addArrangedSubview(label)
+        }
     }
 }

@@ -16,6 +16,7 @@ lane :beta do |options|
     export_method: 'developer-id',
     export_options: './fastlane/developer-id-exports.plist',
     include_bitcode: false,
+    xcargs: "ARCHS='arm64 x86_64' ONLY_ACTIVE_ARCH=NO",
     output_directory: "./build/beta/#{BUILD_NUMBER}",
     output_name: "Juice-Beta-#{BUILD_NUMBER}"
   )
