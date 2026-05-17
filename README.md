@@ -1,3 +1,7 @@
+> @nschneble fork note
+>
+> ⚠️ **Work-in-progress:** Updating Juice for [Macs with Apple silicon](https://support.apple.com/en-us/102527?cid=mc-ols-rosetta-article_102527-macos_finder-52526201)
+
 ![](/images/icon-readme.png)
 # Juice ⚡️
 Make your battery information a bit more interesting by making your own measurement scale instead of a boring battery indicator.
