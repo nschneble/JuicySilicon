@@ -29,7 +29,7 @@ final class LowPowerCoordinator {
     }
     
     func start() {
-        powerSourceObservable.shareReplay(1).subscribe { (event) in
+        powerSourceObservable.share(replay: 1).subscribe { (event) in
             switch event {
             case .next(let sources):
                 guard let source = sources.first else {
@@ -42,7 +42,7 @@ final class LowPowerCoordinator {
             case .completed:
                 break
             }
-        }.addDisposableTo(disposeBag)
+        }.disposed(by: disposeBag)
     }
     
     private func checkForNotificationDismissal(powerSource: PowerSource) {

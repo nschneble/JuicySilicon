@@ -50,7 +50,7 @@ final class PowerSourceWatcher {
     private func sources() -> [PowerSource] {
         let blob = IOPSCopyPowerSourcesInfo().takeRetainedValue()
         if let list = IOPSCopyPowerSourcesList(blob).takeRetainedValue() as? [[String: Any]] {
-            return list.flatMap({ PowerSource(blob: $0)})
+            return list.compactMap({ PowerSource(blob: $0) })
         }
 
         return []

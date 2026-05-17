@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 final class PreferencesStorage {
     private enum Constants {
@@ -18,18 +19,18 @@ final class PreferencesStorage {
     
     private let scanQueue = OperationQueue()
     
-    let chargeDisplayScale: Variable<ChargeScaleDisplay>
-    
-    let scales: Variable<[ChargeScaleDisplay]> = Variable(FileBackedChargeScaleDisplay.makeApplicationDefaults())
-    
+    let chargeDisplayScale: BehaviorRelay<ChargeScaleDisplay>
+
+    let scales: BehaviorRelay<[ChargeScaleDisplay]> = BehaviorRelay(value: FileBackedChargeScaleDisplay.makeApplicationDefaults())
+
     init() {
         scanQueue.name = "com.bsm.macos.storage.scan"
-        chargeDisplayScale = Variable(FileBackedChargeScaleDisplay.makeEmojiScale())
+        chargeDisplayScale = BehaviorRelay(value: FileBackedChargeScaleDisplay.makeEmojiScale())
         scanApplicationSupportForFiles()
     }
     
     func set(chargeDisplayScale: ChargeScaleDisplay) {
-        self.chargeDisplayScale.value = chargeDisplayScale
+        self.chargeDisplayScale.accept(chargeDisplayScale)
         setPreferredScale(scale: chargeDisplayScale)
     }
     
@@ -42,16 +43,16 @@ final class PreferencesStorage {
             
             do {
                 let paths = try fileManager.contentsOfDirectory(atPath: applicationSupport.relativePath)
-                var localScales = paths.map({ URL(fileURLWithPath: $0, relativeTo: applicationSupport) }).flatMap({ FileBackedChargeScaleDisplay(fileURL: $0) })
+                var localScales = paths.map({ URL(fileURLWithPath: $0, relativeTo: applicationSupport) }).compactMap({ FileBackedChargeScaleDisplay(fileURL: $0) })
                 localScales.append(contentsOf: FileBackedChargeScaleDisplay.makeApplicationDefaults())
                 
-                self?.scales.value = localScales
+                self?.scales.accept(localScales)
 
                 let preferredScaleTitle = UserDefaults.standard.string(forKey: Constants.PreferredScaleKey)
 
                 if let title = preferredScaleTitle,
                     let scale = localScales.filter({ $0.title == title }).first {
-                    self?.chargeDisplayScale.value = scale
+                    self?.chargeDisplayScale.accept(scale)
                 }
             } catch (let error) {
                 print(NSLocalizedString("Error scanning application support directory", comment: "Error scanning application support directory") + ": \(error)")
