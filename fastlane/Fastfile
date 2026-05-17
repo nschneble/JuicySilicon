@@ -5,6 +5,31 @@ before_all do
   `rm -rf ../build`
 end
 
+lane :local do
+  increment_build_number(build_number: BUILD_NUMBER)
+
+  build_name = "Juice-#{BUILD_NUMBER}"
+
+  gym(
+    workspace: 'Juice.xcworkspace',
+    scheme: 'Juice',
+    export_method: 'developer-id',
+    export_options: './fastlane/developer-id-exports.plist',
+    include_bitcode: false,
+    xcargs: "ARCHS='arm64 x86_64' ONLY_ACTIVE_ARCH=NO CODE_SIGN_STYLE=Automatic DEVELOPMENT_TEAM=52PWNUCVMU CODE_SIGN_IDENTITY='Apple Development' -allowProvisioningUpdates",
+    output_directory: "./build/local/#{BUILD_NUMBER}",
+    output_name: build_name
+  )
+
+  `rm -rf ../build/local/#{BUILD_NUMBER}/Juice.app`
+
+  export_archive_developer_signed(File.expand_path("../build/local/#{BUILD_NUMBER}"))
+
+  dmg_path = create_dmg("../build/local/#{BUILD_NUMBER}", build_name)
+
+  UI.success "DMG ready: #{dmg_path}"
+end
+
 lane :beta do |options|
   increment_build_number(build_number: BUILD_NUMBER)
 
