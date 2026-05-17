@@ -13,7 +13,7 @@ class AboutPreferencesViewController: NSViewController {
     @IBOutlet weak var buildLabel: NSTextField!
     
     override var nibName: NSNib.Name? {
-        return NSNib.Name(rawValue: "AboutPreferencesViewController")
+        return "AboutPreferencesViewController"
     }
     
     override func viewDidLoad() {

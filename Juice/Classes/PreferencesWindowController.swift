@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol PreferencesWindowControllerDelegate: class {
+protocol PreferencesWindowControllerDelegate: AnyObject {
     func preferences(windowController: PreferencesWindowController, clickedPreference identifier: String)
 }
 
@@ -52,7 +52,7 @@ final class PreferencesWindowController: NSWindowController, NSToolbarDelegate {
     }
     
     override var windowNibName: NSNib.Name? {
-        return NSNib.Name(rawValue: "PreferencesWindowController")
+        return "PreferencesWindowController"
     }
     
     override func windowDidLoad() {
@@ -103,7 +103,7 @@ final class PreferencesWindowController: NSWindowController, NSToolbarDelegate {
                                      paletteLabel: NSLocalizedString("General", comment: "General"),
                                      toolTip: NSLocalizedString("General Settings", comment: "General Settings"),
                                      target: self,
-                                     itemContent: NSImage(named: NSImage.Name(rawValue: "General Icon")),
+                                     itemContent: NSImage(named: "General Icon"),
                                      action: #selector(generalToolbarItemClicked),
                                      menu: nil)
         case Identifiers.Credits:
@@ -112,7 +112,7 @@ final class PreferencesWindowController: NSWindowController, NSToolbarDelegate {
                                      paletteLabel: NSLocalizedString("Credits", comment: "Credits"),
                                      toolTip: NSLocalizedString("Credits for this app", comment: "Credits for this app"),
                                      target: self,
-                                     itemContent: NSImage(named: NSImage.Name(rawValue: "Credits Icon")),
+                                     itemContent: NSImage(named: "Credits Icon"),
                                      action: #selector(creditsToolbarItemClicked),
                                      menu: nil)
         case Identifiers.Tip:
@@ -121,7 +121,7 @@ final class PreferencesWindowController: NSWindowController, NSToolbarDelegate {
                                      paletteLabel: NSLocalizedString("About", comment: "About"),
                                      toolTip: NSLocalizedString("Version Information", comment: "Version Information"),
                                      target: self,
-                                     itemContent: NSImage(named: NSImage.Name(rawValue: "Tip Icon")),
+                                     itemContent: NSImage(named: "Tip Icon"),
                                      action: #selector(tipToolbarItemClicked),
                                      menu: nil)
         case NSToolbarItem.Identifier.flexibleSpace:
